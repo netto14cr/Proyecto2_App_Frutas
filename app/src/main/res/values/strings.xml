@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">FruitGame</string>
+    <string name="et_nombre">¿Cómo te llamas?</string>
+    <string name="boton">Jugar</string>
+    <string name="botonIntrucciones">Tutorial</string>
+
+    <string name="et_vidas">Manzanas: </string>
+    <string name="jugador_nombre">Jugador:</string>
+    <string name="total_score">Score: 0</string>
+    <string name="boton_sumar">Comprobar</string>
+    <string name="et_respuesta">Respuesta</string>
+    <string name="title_activity_instrucciones">InstruccionesActivity</string>
+    <string name="tab_text_1">Rojo</string>
+    <string name="tab_text_2">Amarillo</string>
+    <string name="tab_text_3">Azul</string>
+    <string name="tab_text_4">Verde</string>
+    <string name="tab_text_5">Morado</string>
+    <string name="tab_text_6">Aqua</string>
+    <string name="tab_text_7">Gris</string>
+    <string name="tab_text_8">Celeste</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
