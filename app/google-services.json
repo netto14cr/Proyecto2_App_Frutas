@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "862114928951",
+    "project_id": "proyecto-frutas-ccfd7",
+    "storage_bucket": "proyecto-frutas-ccfd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862114928951:android:b876a59e8fa246349022b2",
+        "android_client_info": {
+          "package_name": "com.android.proyecto_frutas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862114928951-tu7fi16s235516n96i8335e0j1vu1ek9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.proyecto_frutas",
+            "certificate_hash": "4fbe08b4d9e3ea1dcc9e880330c835f26bc8c999"
+          }
+        },
+        {
+          "client_id": "862114928951-dgju6gtiijpli24nb2u6oi7t947gkjja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKF8PYb3qPj22GisZ6TE0KvVYAcO_9pPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862114928951-dgju6gtiijpli24nb2u6oi7t947gkjja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862114928951:android:ef59682cc3efd1549022b2",
+        "android_client_info": {
+          "package_name": "com.ggc.fruitgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862114928951-dgju6gtiijpli24nb2u6oi7t947gkjja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKF8PYb3qPj22GisZ6TE0KvVYAcO_9pPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862114928951-dgju6gtiijpli24nb2u6oi7t947gkjja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
