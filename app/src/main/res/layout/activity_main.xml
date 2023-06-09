@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bn"
-    tools:context="com.ggc.fruitgame.MainActivity">
+    tools:context="com.android.proyecto_frutas.MainActivity">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageView_Personaje"
