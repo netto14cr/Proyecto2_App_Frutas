@@ -1,8 +1,9 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.tradicional;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,16 +13,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.proyecto_frutas.MainActivity;
+import com.android.proyecto_frutas.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity_Nivel8 extends AppCompatActivity {
+import java.util.Objects;
+
+public class MainActivity_Nivel5 extends AppCompatActivity {
 
     private TextView tv_nombre, tv_score;
-    private ImageView iv_Auno, iv_Ados, iv_vidas, imageView_signo;
+    private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
 
@@ -36,16 +41,15 @@ public class MainActivity_Nivel8 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_nivel8);
+        setContentView(R.layout.activity_main_nivel5);
 
-        Toast.makeText(this, "Nivel 6 - Sumas, Restas y Multiplicaciones", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 5 - Multiplicaciones", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView)findViewById(R.id.textView_nombre);
         tv_score = (TextView)findViewById(R.id.textView_score);
         iv_vidas = (ImageView)findViewById(R.id.imageView_vidas);
         iv_Auno = (ImageView)findViewById(R.id.imageView_NumUno);
         iv_Ados = (ImageView)findViewById(R.id.imageView_NumDos);
-        imageView_signo = (ImageView)findViewById(R.id.imageView_signo);
         et_respuesta = (EditText)findViewById(R.id.editText_resultado);
 
         nombre_jugador = getIntent().getStringExtra("jugador");
@@ -65,7 +69,7 @@ public class MainActivity_Nivel8 extends AppCompatActivity {
             iv_vidas.setImageResource(R.drawable.unavida);
         }
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         mp = MediaPlayer.create(this, R.raw.goats);
@@ -134,42 +138,30 @@ public class MainActivity_Nivel8 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if(score <= 80){
+        if(score <= 50){
 
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 
-            if (numAleatorio_uno >= 0 && numAleatorio_uno <=3){
-                resultado = numAleatorio_uno + numAleatorio_dos;
-                imageView_signo.setImageResource(R.drawable.adicion);
-            }else if (numAleatorio_uno >= 4 && numAleatorio_uno <=7){
-                resultado = numAleatorio_uno - numAleatorio_dos;
-                imageView_signo.setImageResource(R.drawable.resta);
-            } else {
-                resultado = numAleatorio_uno * numAleatorio_dos;
-                imageView_signo.setImageResource(R.drawable.multiplicacion);
-            }
+            resultado = numAleatorio_uno * numAleatorio_dos;
 
-            if(resultado >= 0){
-
-                for (int i = 0; i < numero.length; i++){
-                    int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                    if(numAleatorio_uno == i){
-                        iv_Auno.setImageResource(id);
-                    }if(numAleatorio_dos == i){
-                        iv_Ados.setImageResource(id);
-                    }
+            for (int i = 0; i < numero.length; i++){
+                @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
+                if(numAleatorio_uno == i){
+                    iv_Auno.setImageResource(id);
+                }if(numAleatorio_dos == i){
+                    iv_Ados.setImageResource(id);
                 }
-
-            } else {
-                NumAleatorio();
             }
 
         }else {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity_Nivel6.class);
 
-            Toast.makeText(this, "¡FELICIDADES ERES UN GENIO!", Toast.LENGTH_SHORT).show();
-
+            string_score = String.valueOf(score);
+            string_vidas = String.valueOf(vidas);
+            intent.putExtra("jugador", nombre_jugador);
+            intent.putExtra("score", string_score);
+            intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
             mp.stop();

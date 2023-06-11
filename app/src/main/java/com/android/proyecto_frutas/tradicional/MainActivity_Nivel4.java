@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.tradicional;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,16 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.proyecto_frutas.MainActivity;
+import com.android.proyecto_frutas.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity_Nivel3 extends AppCompatActivity {
+public class MainActivity_Nivel4 extends AppCompatActivity {
 
     private TextView tv_nombre, tv_score;
-    private ImageView iv_Auno, iv_Ados, iv_vidas;
+    private ImageView iv_Auno, iv_Ados, iv_vidas, imageView_signo;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
 
@@ -36,15 +38,16 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_nivel3);
+        setContentView(R.layout.activity_main_nivel4);
 
-        Toast.makeText(this, "Nivel 3 - Restas", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 4 - Sumas y Restas", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView)findViewById(R.id.textView_nombre);
         tv_score = (TextView)findViewById(R.id.textView_score);
         iv_vidas = (ImageView)findViewById(R.id.imageView_vidas);
         iv_Auno = (ImageView)findViewById(R.id.imageView_NumUno);
         iv_Ados = (ImageView)findViewById(R.id.imageView_NumDos);
+        imageView_signo = (ImageView)findViewById(R.id.imageView_signo);
         et_respuesta = (EditText)findViewById(R.id.editText_resultado);
 
         nombre_jugador = getIntent().getStringExtra("jugador");
@@ -133,12 +136,18 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if(score <= 30){
+        if(score <= 40){
 
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 
-            resultado = numAleatorio_uno - numAleatorio_dos;
+            if (numAleatorio_uno >= 0 && numAleatorio_uno <=4){
+                resultado = numAleatorio_uno + numAleatorio_dos;
+                imageView_signo.setImageResource(R.drawable.adicion);
+            }else{
+                resultado = numAleatorio_uno - numAleatorio_dos;
+                imageView_signo.setImageResource(R.drawable.resta);
+            }
 
             if(resultado >= 0){
 
@@ -156,7 +165,7 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
             }
 
         }else {
-            Intent intent = new Intent(this, MainActivity_Nivel4.class);
+            Intent intent = new Intent(this, MainActivity_Nivel5.class);
 
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
