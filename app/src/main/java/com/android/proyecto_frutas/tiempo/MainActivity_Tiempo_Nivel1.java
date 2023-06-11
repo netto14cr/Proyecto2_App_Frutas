@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.tiempo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,21 +6,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.proyecto_frutas.MainActivity;
+import com.android.proyecto_frutas.R;
+import com.android.proyecto_frutas.tradicional.MainActivity_Nivel2;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity_Nivel1 extends AppCompatActivity {
+import java.util.Locale;
 
-    private TextView tv_nombre, tv_score;
+public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
+
+    private TextView tv_nombre, tv_score, tv_timer;
     private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
@@ -33,19 +40,32 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
     // Agrega la referencia a la base de datos de Firebase Realtime
     private DatabaseReference databaseRef;
 
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMillis = 15000; // 15 segundos
+    private boolean timerRunning;
+    private static final long COUNTDOWN_IN_MILLIS = 15000; // 15 seconds
+
+    private int defaultTextColor;
+    private ProgressBar progressBar_timer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_nivel1);
+        setContentView(R.layout.activity_main_tiempo_nivel1);
 
         Toast.makeText(this, "Nivel 1 - Sumas básicas", Toast.LENGTH_SHORT).show();
 
         tv_nombre = findViewById(R.id.textView_nombre);
         tv_score = findViewById(R.id.textView_score);
+        tv_timer = findViewById(R.id.textView_timer);
         iv_vidas = findViewById(R.id.imageView_vidas);
         iv_Auno = findViewById(R.id.imageView_NumUno);
         iv_Ados = findViewById(R.id.imageView_NumDos);
         et_respuesta = findViewById(R.id.editText_resultado);
+        progressBar_timer = findViewById(R.id.progressBar_timer);
+
+        defaultTextColor = tv_timer.getCurrentTextColor();
 
         nombre_jugador = getIntent().getStringExtra("jugador");
         tv_nombre.setText("Jugador: " + nombre_jugador);
@@ -61,6 +81,7 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
+        startTimer();
         NumAleatorio();
     }
 
@@ -102,6 +123,8 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
                 }
                 et_respuesta.setText("");
             }
+            resetTimer();
+            startTimer();
             NumAleatorio();
         } else {
             Toast.makeText(this, "Escribe tu respuesta", Toast.LENGTH_SHORT).show();
@@ -168,5 +191,74 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // No hacer nada al presionar el botón de retroceso
+    }
+
+    private void startTimer() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateTimerText();
+
+                // Cambiar el color del círculo a beige cuando el tiempo sea mayor a 5 segundos
+                if (millisUntilFinished > 5000) {
+                    progressBar_timer.setProgressDrawable(getResources().getDrawable(R.drawable.circular_progress_bar));
+                }
+                // Cambiar el color del círculo a rojo cuando falten 5 segundos o menos
+                else {
+                    progressBar_timer.setProgressDrawable(getResources().getDrawable(R.drawable.circular_progress_bar_red));
+                    tv_timer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
+
+                // Actualizar el progreso del ProgressBar
+                int progress = (int) ((COUNTDOWN_IN_MILLIS - millisUntilFinished) * 100 / COUNTDOWN_IN_MILLIS);
+                progressBar_timer.setProgress(progress);
+            }
+
+            @Override
+            public void onFinish() {
+                // El temporizador ha terminado, se ejecuta el código correspondiente
+                et_respuesta.setText("");
+                Toast.makeText(MainActivity_Tiempo_Nivel1.this, "Tardaste mucho tiempo en responder", Toast.LENGTH_SHORT).show();
+                // Reiniciar el cronómetro a 15 segundos
+                resetTimer();
+                startTimer();
+                NumAleatorio();
+                et_respuesta.setText("999");
+                Comparar(findViewById(R.id.button2));
+            }
+        }.start();
+
+        timerRunning = true;
+    }
+
+    private void resetTimer() {
+        countDownTimer.cancel();
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+        updateTimerText();
+        tv_timer.setTextColor(defaultTextColor);
+        timerRunning = false;
+    }
+
+    private void updateTimerText() {
+        int seconds = (int) (timeLeftInMillis / 1000);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+        tv_timer.setText(timeLeftFormatted);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timerRunning) {
+            startTimer();
+        }
     }
 }

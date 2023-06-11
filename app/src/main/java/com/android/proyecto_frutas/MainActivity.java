@@ -9,11 +9,16 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.proyecto_frutas.dibujo.MainActivity_Dibujo_nivel_1;
+import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
+import com.android.proyecto_frutas.tradicional.MainActivity_Nivel1;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +55,41 @@ public class MainActivity extends AppCompatActivity {
         // Obtener el mejor puntaje del usuario actual
         obtenerMejorPuntaje();
 
+        // Obtener referencia a los botones de modo de juego
+        Button traditionalModeButton = findViewById(R.id.button_traditional_mode);
+        Button voiceModeButton = findViewById(R.id.button_voice_mode);
+        Button resultTableButton = findViewById(R.id.button_result_mode);
+        ImageButton settingsButton = findViewById(R.id.button_settings);
+
+        traditionalModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame(MainActivity_Nivel1.class);
+            }
+        });
+
+        voiceModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame(MainActivity_Tiempo_Nivel1.class);
+            }
+        });
+
+        // Esta es la opcion para ver resultados de la tabla firebase
+        resultTableButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame(MainActivity_Dibujo_nivel_1.class);
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettings();
+            }
+        });
+
         // ...
 
         // MUSICA DEL JUEGO
@@ -59,13 +99,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Jugar(View view) {
+        startGame(MainActivity_Nivel1.class);
+    }
+
+    // ...
+
+    private void startGame(Class<?> gameActivityClass) {
         String nombre = et_nombre.getText().toString();
 
         if (!nombre.isEmpty()) {
             mp.stop();
             mp.release();
 
-            Intent intent = new Intent(this, MainActivity_Nivel1.class);
+            Intent intent = new Intent(this, gameActivityClass);
             intent.putExtra("jugador", nombre);
             startActivity(intent);
             finish();
@@ -76,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
             imm.showSoftInput(et_nombre, InputMethodManager.SHOW_IMPLICIT);
         }
+    }
+
+    private void openSettings() {
+        Intent intent = new Intent(this, MainActivity_Nivel1.class);
+        startActivity(intent);
     }
 
     // ...

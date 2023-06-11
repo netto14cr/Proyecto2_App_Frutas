@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.proyecto_frutas">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,41 +16,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FruitGame"
         tools:targetApi="31">
+
+        <activity
+            android:name=".tiempo.MainActivity_Tiempo_Nivel1"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+
+        <activity
+            android:name=".dibujo.MainActivity_Dibujo_nivel_1"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".InstruccionesActivity"
             android:exported="false"
             android:label="@string/title_activity_instrucciones"
             android:theme="@style/Theme.FruitGame.NoActionBar" />
         <activity
-            android:name=".MainActivity_Nivel8"
+            android:name=".tradicional.MainActivity_Nivel8"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel7"
+            android:name=".tradicional.MainActivity_Nivel7"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel6"
+            android:name=".tradicional.MainActivity_Nivel6"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel5"
+            android:name=".tradicional.MainActivity_Nivel5"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel4"
+            android:name=".tradicional.MainActivity_Nivel4"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel3"
+            android:name=".tradicional.MainActivity_Nivel3"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel2"
+            android:name=".tradicional.MainActivity_Nivel2"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".MainActivity_Nivel1"
+            android:name=".tradicional.MainActivity_Nivel1"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
@@ -65,6 +78,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

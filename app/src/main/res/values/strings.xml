@@ -20,4 +20,15 @@
     <string name="tab_text_8">Celeste</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="boton_escuchar" />
+    <string name="modo_tradicional">Modo Tradicional</string>
+    <string name="modo_voz">Modo tiempo</string>
+    <string name="modo_dibujo">Tabla general</string>
+    <string name="settings">Configuración</string>
+    <string name="boton_borrar">Borrar</string>
+    <string name="btn_comprobar">Comrpobar</string>
+    <string name="respuesta" />
+    <string name="_00_00_00">00:00:00</string>
+    <string name="tiempo_restante">Segundos:</string>
+
 </resources>

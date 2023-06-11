@@ -1,8 +1,9 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.tradicional;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -12,13 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.proyecto_frutas.MainActivity;
+import com.android.proyecto_frutas.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity_Nivel4 extends AppCompatActivity {
+public class MainActivity_Nivel7 extends AppCompatActivity {
 
     private TextView tv_nombre, tv_score;
     private ImageView iv_Auno, iv_Ados, iv_vidas, imageView_signo;
@@ -36,9 +39,9 @@ public class MainActivity_Nivel4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_nivel4);
+        setContentView(R.layout.activity_main_nivel7);
 
-        Toast.makeText(this, "Nivel 4 - Sumas y Restas", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 7 - Divisiones Avanzadas", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView)findViewById(R.id.textView_nombre);
         tv_score = (TextView)findViewById(R.id.textView_score);
@@ -134,36 +137,41 @@ public class MainActivity_Nivel4 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if(score <= 40){
+        if(score <= 70){
 
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 
-            if (numAleatorio_uno >= 0 && numAleatorio_uno <=4){
-                resultado = numAleatorio_uno + numAleatorio_dos;
-                imageView_signo.setImageResource(R.drawable.adicion);
-            }else{
-                resultado = numAleatorio_uno - numAleatorio_dos;
-                imageView_signo.setImageResource(R.drawable.resta);
+            // Asegura que numAleatorio_uno sea siempre el número mayor
+            if (numAleatorio_uno < numAleatorio_dos) {
+                int temp = numAleatorio_uno;
+                numAleatorio_uno = numAleatorio_dos;
+                numAleatorio_dos = temp;
             }
 
-            if(resultado >= 0){
+            // Genera un divisor aleatorio entre 2 y 9 (exclusivo)
+            int divisor = (int) (Math.random() * 7) + 2;
 
-                for (int i = 0; i < numero.length; i++){
-                    int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                    if(numAleatorio_uno == i){
-                        iv_Auno.setImageResource(id);
-                    }if(numAleatorio_dos == i){
-                        iv_Ados.setImageResource(id);
-                    }
+            // Verifica que la división sea exacta y no tenga decimales
+            while (numAleatorio_uno % divisor != 0) {
+                numAleatorio_uno++;
+            }
+
+            resultado = numAleatorio_uno / divisor;
+
+            for (int i = 0; i < numero.length; i++){
+                @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
+                if(numAleatorio_uno == i){
+                    iv_Auno.setImageResource(id);
+                } if(divisor == i){
+                    iv_Ados.setImageResource(id);
                 }
-
-            } else {
-                NumAleatorio();
             }
 
-        }else {
-            Intent intent = new Intent(this, MainActivity_Nivel5.class);
+            imageView_signo.setImageResource(R.drawable.division);
+
+        } else {
+            Intent intent = new Intent(this, MainActivity_Nivel8.class);
 
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
