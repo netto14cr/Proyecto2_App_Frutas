@@ -10,11 +10,11 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_logo_manzana"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_logo_manzana_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FruitGame"
+        android:theme="@style/Theme.Proyecto2"
         tools:targetApi="31">
 
         <activity
@@ -22,15 +22,6 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
 
-        <activity
-            android:name=".dibujo.MainActivity_Dibujo_nivel_1"
-            android:configChanges="orientation|screenSize"
-            android:exported="false" />
-        <activity
-            android:name=".InstruccionesActivity"
-            android:exported="false"
-            android:label="@string/title_activity_instrucciones"
-            android:theme="@style/Theme.FruitGame.NoActionBar" />
         <activity
             android:name=".tradicional.MainActivity_Nivel8"
             android:configChanges="orientation|screenSize"
