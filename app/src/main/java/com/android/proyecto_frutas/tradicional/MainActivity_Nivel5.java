@@ -1,13 +1,18 @@
 package com.android.proyecto_frutas.tradicional;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +47,16 @@ public class MainActivity_Nivel5 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_nivel5);
+        Button btnRegresar = findViewById(R.id.btn_regresar);
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lógica para regresar al MainActivity
+                Intent intent = new Intent(MainActivity_Nivel5.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         Toast.makeText(this, "Nivel 5 - Multiplicaciones", Toast.LENGTH_SHORT).show();
 
@@ -118,12 +133,7 @@ public class MainActivity_Nivel5 extends AppCompatActivity {
                         iv_vidas.setImageResource(R.drawable.unavida);
                         break;
                     case 0:
-                        Toast.makeText(this, "Has perdido todas tus manzanas", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        mp.stop();
-                        mp.release();
+                        compartirResultado();
                         break;
                 }
 
@@ -137,6 +147,74 @@ public class MainActivity_Nivel5 extends AppCompatActivity {
         }
     }
 
+    private void continuarJuego() {
+        Toast.makeText(this, "Has perdido todas tus manzanas", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        mp.stop();
+        mp.release();
+    }
+    private void compartirResultado() {
+        mostrarAlertaCompartir();
+    }
+    private void mostrarAlertaCompartir() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Compartir resultados");
+        builder.setMessage("¿Deseas compartir tus resultados en WhatsApp?");
+
+        // Botón Compartir
+        builder.setPositiveButton("Compartir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Aquí puedes agregar la lógica para compartir los resultados en WhatsApp
+                compartirEnWhatsApp();
+            }
+        });
+
+        // Botón Cancelar
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                continuarJuego();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void compartirEnWhatsApp() {
+        String textoCompartir = "¡Mis resultados son increíbles!" + score;
+
+        // Verificar si WhatsApp está instalado en el dispositivo
+        if (isWhatsAppInstalled()) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, textoCompartir);
+            intent.setPackage("com.whatsapp");
+
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                // WhatsApp no está instalado o la API de WhatsApp no es compatible
+                Toast.makeText(this, "WhatsApp no está instalado", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // WhatsApp no está instalado
+            Toast.makeText(this, "WhatsApp no está instalado", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private boolean isWhatsAppInstalled() {
+        PackageManager packageManager = getPackageManager();
+        try {
+            packageManager.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
     public void NumAleatorio(){
         if(score <= 50){
 
