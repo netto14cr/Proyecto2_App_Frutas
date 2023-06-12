@@ -74,7 +74,6 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         iv_Auno = findViewById(R.id.imageView_NumUno);
         iv_Ados = findViewById(R.id.imageView_NumDos);
         et_respuesta = findViewById(R.id.editText_resultado);
-        progressBar_timer = findViewById(R.id.progressBar_timer);
 
         defaultTextColor = tv_timer.getCurrentTextColor();
 
@@ -82,7 +81,7 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         tv_nombre.setText("Jugador: " + nombre_jugador);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setIcon(R.mipmap.app_logo);
 
         // Obtén la referencia a la ubicación "puntaje" en la base de datos de Firebase
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
@@ -213,11 +212,10 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
 
                 // Cambiar el color del círculo a beige cuando el tiempo sea mayor a 5 segundos
                 if (millisUntilFinished > 5000) {
-                    progressBar_timer.setProgressDrawable(getResources().getDrawable(R.drawable.circular_progress_bar));
+                    tv_timer.setTextColor(getResources().getColor(android.R.color.holo_blue_light));
                 }
                 // Cambiar el color del círculo a rojo cuando falten 5 segundos o menos
                 else {
-                    progressBar_timer.setProgressDrawable(getResources().getDrawable(R.drawable.circular_progress_bar_red));
                     tv_timer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
 

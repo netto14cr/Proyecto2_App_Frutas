@@ -68,7 +68,7 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
         tv_nombre.setText("Jugador: " + nombre_jugador);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setIcon(R.mipmap.app_logo);
 
         // Obtén la referencia a la ubicación "puntaje" en la base de datos de Firebase
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg9"
+    android:background="@drawable/fondo03"
     tools:context="com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1">
 
     <TextView
@@ -59,18 +59,6 @@
         android:text="@string/tiempo_restante"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
-
-    <ProgressBar
-        android:id="@+id/progressBar_timer"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:indeterminate="false"
-        android:max="15000"
-        android:progress="15000"
-        android:progressDrawable="@drawable/circular_progress_bar" />
-
 
     <ImageView
         android:id="@+id/imageView_vidas"
