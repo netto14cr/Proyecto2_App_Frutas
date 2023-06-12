@@ -67,7 +67,7 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setIcon(R.mipmap.app_logo);
 
         mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();

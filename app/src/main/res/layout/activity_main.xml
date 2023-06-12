@@ -4,20 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bn"
+    android:background="@drawable/fondo02"
     tools:context="com.android.proyecto_frutas.MainActivity">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/imageView_Personaje"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:contentDescription="@string/app_name"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="9258-bouncing-fruits.json"
-        app:lottie_imageAssetsFolder="assets"
-        app:lottie_loop="true" />
+        android:contentDescription="@string/app_name"/>
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewPager"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
+
 
     <EditText
         android:id="@+id/txt_nombre"
