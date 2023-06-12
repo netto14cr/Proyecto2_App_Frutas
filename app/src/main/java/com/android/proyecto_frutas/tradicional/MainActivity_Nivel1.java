@@ -111,7 +111,7 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
     }
 
     public void NumAleatorio() {
-        if (score <= 10) {
+        if (score <= 1) {
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
             resultado = numAleatorio_uno + numAleatorio_dos;

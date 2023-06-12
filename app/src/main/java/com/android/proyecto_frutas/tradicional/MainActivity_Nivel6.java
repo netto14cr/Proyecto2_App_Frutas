@@ -21,10 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class MainActivity_Nivel6 extends AppCompatActivity {
 
     private TextView tv_nombre, tv_score;
-    private ImageView iv_Auno, iv_Ados, iv_vidas, imageView_signo;
+    private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
 
@@ -43,13 +45,12 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
 
         Toast.makeText(this, "Nivel 6 - Divisiones Moderadas", Toast.LENGTH_SHORT).show();
 
-        tv_nombre = (TextView)findViewById(R.id.textView_nombre);
-        tv_score = (TextView)findViewById(R.id.textView_score);
-        iv_vidas = (ImageView)findViewById(R.id.imageView_vidas);
-        iv_Auno = (ImageView)findViewById(R.id.imageView_NumUno);
-        iv_Ados = (ImageView)findViewById(R.id.imageView_NumDos);
-        imageView_signo = (ImageView)findViewById(R.id.imageView_signo);
-        et_respuesta = (EditText)findViewById(R.id.editText_resultado);
+        tv_nombre = findViewById(R.id.textView_nombre);
+        tv_score = findViewById(R.id.textView_score);
+        iv_vidas = findViewById(R.id.imageView_vidas);
+        iv_Auno = findViewById(R.id.imageView_NumUno);
+        iv_Ados = findViewById(R.id.imageView_NumDos);
+        et_respuesta = findViewById(R.id.editText_resultado);
 
         nombre_jugador = getIntent().getStringExtra("jugador");
         tv_nombre.setText("Jugador: " + nombre_jugador);
@@ -68,7 +69,7 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
             iv_vidas.setImageResource(R.drawable.unavida);
         }
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
         mp = MediaPlayer.create(this, R.raw.goats);
@@ -139,40 +140,23 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
     public void NumAleatorio(){
         if(score <= 60){
 
-            numAleatorio_uno = (int) (Math.random() * 10);
-            numAleatorio_dos = (int) (Math.random() * 10);
+            do {
+                numAleatorio_uno = (int) (Math.random() * 10);
+                numAleatorio_dos = (int) (Math.random() * 10);
+            } while (numAleatorio_uno == 0 || numAleatorio_uno < numAleatorio_dos || numAleatorio_uno % 2 != 0 || numAleatorio_dos % 2 != 0 || numAleatorio_dos == 0);
 
-            // Asegura que numAleatorio_uno sea siempre el número mayor
-            if (numAleatorio_uno < numAleatorio_dos) {
-                int temp = numAleatorio_uno;
-                numAleatorio_uno = numAleatorio_dos;
-                numAleatorio_dos = temp;
-            }
+            resultado = numAleatorio_uno / numAleatorio_dos;
 
-            // Genera un divisor aleatorio entre 2 y 9 (exclusivo)
-            int divisor = (int) (Math.random() * 8) + 2;
-
-            resultado = numAleatorio_uno * divisor;
-
-            if(resultado >= 0 && numAleatorio_uno % divisor == 0){
-                // El resultado es un número entero
-
-                for (int i = 0; i < numero.length; i++){
-                    @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                    if(numAleatorio_uno == i){
-                        iv_Auno.setImageResource(id);
-                    }if(divisor == i){
-                        iv_Ados.setImageResource(id);
-                    }
+            for (int i = 0; i < numero.length; i++){
+                @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
+                if(numAleatorio_uno == i){
+                    iv_Auno.setImageResource(id);
+                }if(numAleatorio_dos == i){
+                    iv_Ados.setImageResource(id);
                 }
-
-                imageView_signo.setImageResource(R.drawable.division);
-
-            } else {
-                NumAleatorio();
             }
 
-        } else {
+        }else {
             Intent intent = new Intent(this, MainActivity_Nivel7.class);
 
             string_score = String.valueOf(score);
@@ -180,13 +164,13 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
             intent.putExtra("jugador", nombre_jugador);
             intent.putExtra("score", string_score);
             intent.putExtra("vidas", string_vidas);
-
             startActivity(intent);
             finish();
             mp.stop();
             mp.release();
         }
     }
+
 
     public void BaseDeDatos(){
         DatabaseReference jugadorRef = databaseRef.child(nombre_jugador);

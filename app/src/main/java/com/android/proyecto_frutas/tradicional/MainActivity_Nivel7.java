@@ -136,40 +136,30 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
         }
     }
 
-    public void NumAleatorio(){
-        if(score <= 70){
+    public void NumAleatorio() {
+        if (score <= 70) {
+            do {
+                numAleatorio_uno = (int) (Math.random() * 10);
+                numAleatorio_dos = (int) (Math.random() * 10);
+            } while (numAleatorio_uno <= numAleatorio_dos ||
+                    numAleatorio_uno % 2 != 0 ||
+                    numAleatorio_dos % 2 != 0 ||
+                    numAleatorio_dos == 0 ||
+                    (numAleatorio_uno % numAleatorio_dos != 0));
 
-            numAleatorio_uno = (int) (Math.random() * 10);
-            numAleatorio_dos = (int) (Math.random() * 10);
+            resultado = numAleatorio_uno / numAleatorio_dos;
 
-            // Asegura que numAleatorio_uno sea siempre el número mayor
-            if (numAleatorio_uno < numAleatorio_dos) {
-                int temp = numAleatorio_uno;
-                numAleatorio_uno = numAleatorio_dos;
-                numAleatorio_dos = temp;
-            }
-
-            // Genera un divisor aleatorio entre 2 y 9 (exclusivo)
-            int divisor = (int) (Math.random() * 7) + 2;
-
-            // Verifica que la división sea exacta y no tenga decimales
-            while (numAleatorio_uno % divisor != 0) {
-                numAleatorio_uno++;
-            }
-
-            resultado = numAleatorio_uno / divisor;
-
-            for (int i = 0; i < numero.length; i++){
+            for (int i = 0; i < numero.length; i++) {
                 @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                if(numAleatorio_uno == i){
+                if (numAleatorio_uno == i) {
                     iv_Auno.setImageResource(id);
-                } if(divisor == i){
+                }
+                if (numAleatorio_dos == i) {
                     iv_Ados.setImageResource(id);
                 }
             }
 
             imageView_signo.setImageResource(R.drawable.division);
-
         } else {
             Intent intent = new Intent(this, MainActivity_Nivel8.class);
 
@@ -185,6 +175,7 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
             mp.release();
         }
     }
+
 
     public void BaseDeDatos(){
         DatabaseReference jugadorRef = databaseRef.child(nombre_jugador);
