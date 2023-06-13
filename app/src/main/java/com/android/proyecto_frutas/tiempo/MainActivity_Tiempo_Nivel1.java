@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -61,6 +62,16 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         setContentView(R.layout.activity_main_tiempo_nivel1);
 
         Toast.makeText(this, "Nivel 1 - Sumas básicas", Toast.LENGTH_SHORT).show();
+        Button btnRegresar = findViewById(R.id.btn_regresar);
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lógica para regresar al MainActivity
+                Intent intent = new Intent(MainActivity_Tiempo_Nivel1.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         tv_nombre = findViewById(R.id.textView_nombre);
         tv_score = findViewById(R.id.textView_score);
@@ -82,7 +93,7 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
 
         // Crea los objetos MediaPlayer
-        mp = MediaPlayer.create(this, R.raw.goats);
+        //mp = MediaPlayer.create(this, R.raw.goats);
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
@@ -185,8 +196,8 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
             intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
-            mp.stop();
-            mp.release();
+            //mp.stop();
+//            mp.release();
         }
     }
 
