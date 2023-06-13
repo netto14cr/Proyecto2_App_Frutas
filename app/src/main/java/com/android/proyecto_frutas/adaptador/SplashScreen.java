@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.adaptador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.proyecto_frutas.MainActivity;
+import com.android.proyecto_frutas.R;
 
 public class SplashScreen extends AppCompatActivity {
 

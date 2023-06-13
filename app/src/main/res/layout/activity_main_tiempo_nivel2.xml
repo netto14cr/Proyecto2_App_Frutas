@@ -6,12 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo08"
-    tools:context="com.android.proyecto_frutas.tradicional.MainActivity_Nivel5">
+    tools:context="com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel2">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/textView_nombre"
@@ -43,6 +42,27 @@
             android:layout_alignStart="@+id/textView_nombre"
             android:layout_alignTop="@+id/imageView_vidas"
             android:text="@string/et_vidas"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/_00_00_00"
+            android:textColor="@android:color/black"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/textView_tiempo_restante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView_timer"
+            android:layout_centerHorizontal="true"
+            android:text="@string/tiempo_restante"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -100,15 +120,15 @@
             android:ems="10"
             android:hint="@string/et_respuesta"
             android:inputType="number"
-            tools:targetApi="o"/>
+            tools:targetApi="o" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="185dp"
             android:layout_height="40dp"
             android:layout_alignTop="@+id/editText_resultado"
-            android:layout_marginStart="-26dp"
-            android:layout_marginTop="-1dp"
+            android:layout_marginStart="-32dp"
+            android:layout_marginTop="-2dp"
             android:layout_toEndOf="@+id/editText_resultado"
             android:background="@drawable/fondoboton"
             android:onClick="Comparar"
@@ -126,6 +146,3 @@
         app:menu="@menu/menu_completo" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
