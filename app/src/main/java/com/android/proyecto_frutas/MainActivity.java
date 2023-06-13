@@ -1,6 +1,8 @@
 package com.android.proyecto_frutas;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
@@ -9,7 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,10 +22,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.LottieAnimationView;
-import com.android.proyecto_frutas.adapters.SliderAdapter;
-import com.android.proyecto_frutas.dibujo.MainActivity_Dibujo_nivel_1;
-import com.android.proyecto_frutas.models.Slide;
+import com.android.proyecto_frutas.adaptador.SliderAdapter;
+import com.android.proyecto_frutas.modelo.NavegacionMenu;
+import com.android.proyecto_frutas.modelo.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
 import com.android.proyecto_frutas.tradicional.MainActivity_Nivel1;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +35,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer mp;
     private Handler sliderHandler;
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -58,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         layoutDots = findViewById(R.id.layoutDots);
         tv_bestScore = findViewById(R.id.textView_BestScore);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.app_logo);
+
 
         // Obtener referencia a la base de datos de Firebase
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -145,7 +148,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ...
+        // Detener todos los sonidos antes de crear uno nuevo
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+        }
 
         // MÚSICA DEL JUEGO
         mp = MediaPlayer.create(this, R.raw.juego_normal);
@@ -155,6 +162,17 @@ public class MainActivity extends AppCompatActivity {
         // Inicia el cambio automático de imágenes del ViewPager cada 3 segundos
         sliderHandler = new Handler();
         startSlideShow();
+
+
+        // En tu actividad principal
+        NavegacionMenu navegacionMenu = new NavegacionMenu(this, "");
+        navegacionMenu.setupNavigationDrawer();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void Jugar(View view) {
@@ -190,6 +208,25 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity_Nivel1.class);
         startActivity(intent);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mp != null) {
+            mp.release();
+            mp = null;
+        }
+    }
+
 
     // ...
 

@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas.adapters;
+package com.android.proyecto_frutas.adaptador;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 
 import com.android.proyecto_frutas.R;
-import com.android.proyecto_frutas.models.Slide;
+import com.android.proyecto_frutas.modelo.Slide;
 
 import java.util.List;
 

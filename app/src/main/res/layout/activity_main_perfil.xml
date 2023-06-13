@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo01"
+    tools:context="com.android.proyecto_frutas.general.MainActivity_Perfil">
+
+
+    <!-- Título de la actividad -->
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar mi perfil"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Cuadro con imagen por defecto -->
+    <LinearLayout
+        android:id="@+id/layoutImagen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/fondo01"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/btnEditarGaleria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_weight="40">
+
+        <!-- Imagen por defecto -->
+        <ImageView
+            android:id="@+id/imageViewPerfil"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avatar_01" />
+
+        <!-- Botón para editar imagen desde galería -->
+        <Button
+            android:id="@+id/btnEditarGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="editarDesdeGaleria"
+            android:text="Editar desde galería" />
+
+        <!-- Botón para capturar imagen desde la cámara -->
+        <Button
+            android:id="@+id/btnCapturarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="capturarFoto"
+            android:text="Capturar foto"
+            app:layout_constraintTop_toBottomOf="@id/btnEditarGaleria" />
+
+        <!-- Botón para capturar imagen desde la cámara -->
+        <Button
+            android:id="@+id/btnDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="defaultImage"
+            android:text="Imagen por defecto"
+            app:layout_constraintTop_toBottomOf="@id/btnCapturarFoto" />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/menu_completo" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

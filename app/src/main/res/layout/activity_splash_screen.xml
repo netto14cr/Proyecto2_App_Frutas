@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen"
+    tools:context=".adaptador.SplashScreen"
     android:orientation="vertical"
     android:background="@drawable/fondo01"
     android:gravity="center">
@@ -23,7 +23,7 @@
         android:layout_marginTop="200dp"
         android:fontFamily="@font/aclonica"
         android:text="@string/proyecto_2_app_frutas"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold" />
 

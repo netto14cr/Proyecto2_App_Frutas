@@ -7,31 +7,39 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.proyecto_frutas.MainActivity;
 import com.android.proyecto_frutas.R;
-import com.android.proyecto_frutas.tradicional.MainActivity_Nivel2;
+import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import java.util.Locale;
 
 public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private TextView tv_nombre, tv_score, tv_timer;
     private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
+    private boolean isMenuOpen = false;
+
 
     int score, numAleatorio_uno, numAleatorio_dos, resultado, vidas = 3;
     String nombre_jugador, string_score, string_vidas;
@@ -44,11 +52,9 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis = 15000; // 15 segundos
     private boolean timerRunning;
-    private static final long COUNTDOWN_IN_MILLIS = 15000; // 15 seconds
+    private static final long COUNTDOWN_IN_MILLIS = 15000; // 15 segundos
 
     private int defaultTextColor;
-    private ProgressBar progressBar_timer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,19 +99,37 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
 
         startTimer();
         NumAleatorio();
+
+        // En tu actividad principal
+        NavegacionMenu navegacionMenu = new NavegacionMenu(this, nombre_jugador);
+        navegacionMenu.setupNavigationDrawer();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void Comparar(View view) {
         String respuesta = et_respuesta.getText().toString();
 
         if (!respuesta.equals("")) {
-            int respuesta_jugador = Integer.parseInt(respuesta);
+            int respuesta_jugador;
+            try {
+                respuesta_jugador = Integer.parseInt(respuesta);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Respuesta inválida. Ingrese un número válido.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (resultado == respuesta_jugador) {
                 mp_great.start();
                 score++;
                 tv_score.setText("Score: " + score);
                 et_respuesta.setText("");
                 BaseDeDatos();
+                resetTimer();
+                startTimer();
             } else {
                 mp_bad.start();
                 vidas--;
@@ -138,6 +162,8 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
             NumAleatorio();
         } else {
             Toast.makeText(this, "Escribe tu respuesta", Toast.LENGTH_SHORT).show();
+            resetTimer();
+            startTimer();
         }
     }
 
@@ -161,7 +187,8 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
                 NumAleatorio();
             }
         } else {
-            Intent intent = new Intent(this, MainActivity_Nivel2.class);
+            pauseTimer();
+            Intent intent = new Intent(this, MainActivity_Tiempo_Nivel2.class);
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
             intent.putExtra("jugador", nombre_jugador);
@@ -203,6 +230,41 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         // No hacer nada al presionar el botón de retroceso
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void openMenu() {
+        isMenuOpen = true;
+        pauseTimer();
+    }
+
+    private void closeMenu() {
+        isMenuOpen = false;
+        resumeTimer();
+    }
+
+    private void pauseTimer() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    private void resumeTimer() {
+        if (timerRunning) {
+            startTimer();
+        }
+    }
+
     private void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
@@ -211,17 +273,13 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
                 updateTimerText();
 
                 // Cambiar el color del círculo a beige cuando el tiempo sea mayor a 5 segundos
-                if (millisUntilFinished > 5000) {
-                    tv_timer.setTextColor(getResources().getColor(android.R.color.holo_blue_light));
+                if (millisUntilFinished >= 5000) {
+                    tv_timer.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
                 }
                 // Cambiar el color del círculo a rojo cuando falten 5 segundos o menos
                 else {
                     tv_timer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 }
-
-                // Actualizar el progreso del ProgressBar
-                int progress = (int) ((COUNTDOWN_IN_MILLIS - millisUntilFinished) * 100 / COUNTDOWN_IN_MILLIS);
-                progressBar_timer.setProgress(progress);
             }
 
             @Override

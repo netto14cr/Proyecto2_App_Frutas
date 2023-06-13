@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas;
+package com.android.proyecto_frutas.modelo;
 
 public class Puntaje {
     private String nombre;

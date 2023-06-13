@@ -1,115 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo03"
-    tools:context=".tradicional.MainActivity_Nivel2">
+    android:background="@drawable/fondo08"
+    tools:context="com.android.proyecto_frutas.tradicional.MainActivity_Nivel2">
 
-  <TextView
-      android:id="@+id/textView_nombre"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentTop="true"
-      android:layout_marginStart="14dp"
-      android:layout_marginTop="11dp"
-      android:text="@string/jugador_nombre"
-      android:textColor="@android:color/black"
-      android:textSize="18sp" />
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-
-  <TextView
-      android:id="@+id/textView_score"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignStart="@+id/textView_nombre"
-      android:layout_below="@+id/textView_nombre"
-      android:text="@string/total_score"
-      android:textColor="@android:color/black"
-      android:textSize="18sp" />
-
-  <TextView
-      android:id="@+id/textView_Manzanas"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignStart="@+id/textView_nombre"
-      android:layout_alignTop="@+id/imageView_vidas"
-      android:text="@string/et_vidas"
-      android:textColor="@android:color/black"
-      android:textSize="18sp" />
-
-  <ImageView
-      android:id="@+id/imageView_vidas"
-      android:layout_width="80dp"
-      android:layout_height="25dp"
-      android:layout_alignParentStart="true"
-      android:layout_below="@+id/textView_score"
-      android:layout_marginStart="103dp"
-      android:contentDescription="@string/app_name"
-      app:srcCompat="@drawable/tresvidas" />
-
-  <ImageView
-      android:id="@+id/imageView_NumUno"
-      android:layout_width="120dp"
-      android:layout_height="120dp"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentTop="true"
-      android:layout_marginTop="112dp"
-      android:contentDescription="@string/app_name"
-      app:srcCompat="@drawable/cero" />
-
-  <ImageView
-      android:id="@+id/imageView_signo"
-      android:layout_width="110dp"
-      android:layout_height="110dp"
-      android:layout_alignBottom="@+id/imageView_NumUno"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="-2dp"
-      android:contentDescription="@string/app_name"
-      app:srcCompat="@drawable/adicion" />
+    <TextView
+        android:id="@+id/textView_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/jugador_nombre"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
 
-  <ImageView
-      android:id="@+id/imageView_NumDos"
-      android:layout_width="120dp"
-      android:layout_height="120dp"
-      android:layout_alignTop="@+id/imageView_NumUno"
-      android:layout_alignParentEnd="true"
-      android:layout_marginTop="0dp"
-      android:layout_marginEnd="1dp"
-      android:contentDescription="@string/app_name"
-      app:srcCompat="@drawable/cero" />
+    <TextView
+        android:id="@+id/textView_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_nombre"
+        android:layout_below="@+id/textView_nombre"
+        android:text="@string/total_score"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
-  <EditText
-      android:id="@+id/editText_resultado"
-      android:layout_width="118dp"
-      android:layout_height="40dp"
-      android:layout_alignParentBottom="true"
-      android:layout_marginEnd="36dp"
-      android:layout_marginBottom="251dp"
-      android:layout_toStartOf="@+id/imageView_NumDos"
-      android:autofillHints=""
-      android:ems="10"
-      android:hint="@string/et_respuesta"
-      android:inputType="number"
-      tools:targetApi="o" />
+    <TextView
+        android:id="@+id/textView_Manzanas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView_nombre"
+        android:layout_alignTop="@+id/imageView_vidas"
+        android:text="@string/et_vidas"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
-  <Button
-      android:id="@+id/button2"
-      android:layout_width="185dp"
-      android:layout_height="40dp"
-      android:layout_alignTop="@+id/editText_resultado"
-      android:layout_marginStart="-32dp"
-      android:layout_marginTop="-2dp"
-      android:layout_toEndOf="@+id/editText_resultado"
-      android:background="@drawable/fondoboton"
-      android:onClick="Comparar"
-      android:text="@string/boton_sumar"
-      android:textColor="@android:color/background_light" />
+    <ImageView
+        android:id="@+id/imageView_vidas"
+        android:layout_width="80dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView_score"
+        android:layout_marginStart="103dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/tresvidas" />
 
-  <Button
+    <ImageView
+        android:id="@+id/imageView_NumUno"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="112dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/cero" />
+
+    <ImageView
+        android:id="@+id/imageView_signo"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignBottom="@+id/imageView_NumUno"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-2dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/adicion" />
+
+
+    <ImageView
+        android:id="@+id/imageView_NumDos"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignTop="@+id/imageView_NumUno"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="1dp"
+        android:contentDescription="@string/app_name"
+        app:srcCompat="@drawable/cero" />
+
+    <EditText
+        android:id="@+id/editText_resultado"
+        android:layout_width="118dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="251dp"
+        android:layout_toStartOf="@+id/imageView_NumDos"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/et_respuesta"
+        android:inputType="number"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="185dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/editText_resultado"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-2dp"
+        android:layout_toEndOf="@+id/editText_resultado"
+        android:background="@drawable/fondoboton"
+        android:onClick="Comparar"
+        android:text="@string/boton_sumar"
+        android:textColor="@android:color/background_light" />
+    
+    <Button
       android:id="@+id/btn_regresar"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -123,4 +128,15 @@
       android:layout_marginBottom="67dp"
       android:text="Regresar" />
 
-</RelativeLayout>
+  </RelativeLayout>
+
+  
+  <com.google.android.material.navigation.NavigationView
+      android:id="@+id/navigation_view"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:headerLayout="@layout/nav_header"
+      app:menu="@menu/menu_completo" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

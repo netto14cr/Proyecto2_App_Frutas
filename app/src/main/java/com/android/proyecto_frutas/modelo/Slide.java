@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas.models;
+package com.android.proyecto_frutas.modelo;
 
 public class Slide {
     private int image;

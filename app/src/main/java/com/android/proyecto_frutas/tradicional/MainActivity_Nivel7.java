@@ -1,8 +1,10 @@
 package com.android.proyecto_frutas.tradicional;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 
 import com.android.proyecto_frutas.MainActivity;
 import com.android.proyecto_frutas.R;
+import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity_Nivel7 extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
     private TextView tv_nombre, tv_score;
     private ImageView iv_Auno, iv_Ados, iv_vidas, imageView_signo;
     private EditText et_respuesta;
@@ -97,6 +103,23 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
 
         NumAleatorio();
+        // En tu actividad principal
+        NavegacionMenu navegacionMenu = new NavegacionMenu(this, nombre_jugador);
+        navegacionMenu.setupNavigationDrawer();
+        drawerLayout = findViewById(R.id.drawer_layout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void Comparar(View view){
@@ -214,40 +237,31 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
             return false;
         }
     }
-    public void NumAleatorio(){
-        if(score <= 70){
 
-            numAleatorio_uno = (int) (Math.random() * 10);
-            numAleatorio_dos = (int) (Math.random() * 10);
+    public void NumAleatorio() {
+        if (score <= 70) {
+            do {
+                numAleatorio_uno = (int) (Math.random() * 10);
+                numAleatorio_dos = (int) (Math.random() * 10);
+            } while (numAleatorio_uno <= numAleatorio_dos ||
+                    numAleatorio_uno % 2 != 0 ||
+                    numAleatorio_dos % 2 != 0 ||
+                    numAleatorio_dos == 0 ||
+                    (numAleatorio_uno % numAleatorio_dos != 0));
 
-            // Asegura que numAleatorio_uno sea siempre el número mayor
-            if (numAleatorio_uno < numAleatorio_dos) {
-                int temp = numAleatorio_uno;
-                numAleatorio_uno = numAleatorio_dos;
-                numAleatorio_dos = temp;
-            }
+            resultado = numAleatorio_uno / numAleatorio_dos;
 
-            // Genera un divisor aleatorio entre 2 y 9 (exclusivo)
-            int divisor = (int) (Math.random() * 7) + 2;
-
-            // Verifica que la división sea exacta y no tenga decimales
-            while (numAleatorio_uno % divisor != 0) {
-                numAleatorio_uno++;
-            }
-
-            resultado = numAleatorio_uno / divisor;
-
-            for (int i = 0; i < numero.length; i++){
+            for (int i = 0; i < numero.length; i++) {
                 @SuppressLint("DiscouragedApi") int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                if(numAleatorio_uno == i){
+                if (numAleatorio_uno == i) {
                     iv_Auno.setImageResource(id);
-                } if(divisor == i){
+                }
+                if (numAleatorio_dos == i) {
                     iv_Ados.setImageResource(id);
                 }
             }
 
             imageView_signo.setImageResource(R.drawable.division);
-
         } else {
             Intent intent = new Intent(this, MainActivity_Nivel8.class);
 
@@ -263,6 +277,7 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
 //            mp.release();
         }
     }
+
 
     public void BaseDeDatos(){
         DatabaseReference jugadorRef = databaseRef.child(nombre_jugador);
