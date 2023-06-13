@@ -92,7 +92,8 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
-        //mp = MediaPlayer.create(this, R.raw.goats);
+        // MÚSICA DEL JUEGO
+        mp = MediaPlayer.create(this, R.raw.dificil);
         mp.start();
         mp.setLooping(true);
 
@@ -273,8 +274,8 @@ public class MainActivity_Nivel7 extends AppCompatActivity {
 
             startActivity(intent);
             finish();
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
         }
     }
 

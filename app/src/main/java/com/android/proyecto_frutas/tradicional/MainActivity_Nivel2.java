@@ -90,7 +90,8 @@ public class MainActivity_Nivel2 extends AppCompatActivity {
         }
 
 
-        //mp = MediaPlayer.create(this, R.raw.goats);
+        // MÚSICA DEL JUEGO
+        mp = MediaPlayer.create(this, R.raw.dificil);
         mp.start();
         mp.setLooping(true);
 
@@ -267,8 +268,8 @@ public class MainActivity_Nivel2 extends AppCompatActivity {
 
             startActivity(intent);
             finish();
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
         }
     }
 

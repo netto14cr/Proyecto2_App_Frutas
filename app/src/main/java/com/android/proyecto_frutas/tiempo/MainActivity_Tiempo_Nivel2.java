@@ -89,9 +89,7 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
-        mp = MediaPlayer.create(this, R.raw.goats);
-        mp.start();
-        mp.setLooping(true);
+        
 
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);

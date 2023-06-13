@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.proyecto_frutas.adaptador.SliderAdapter;
+import com.android.proyecto_frutas.dibujo.MainActivity_Dibujo_nivel_1;
 import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.android.proyecto_frutas.modelo.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
@@ -185,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
         String nombre = et_nombre.getText().toString();
 
         if (!nombre.isEmpty()) {
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
 
             // Detiene el cambio automático de imágenes del ViewPager
             stopSlideShow();
