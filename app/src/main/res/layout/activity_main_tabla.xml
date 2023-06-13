@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo03"
-    tools:context="com.android.proyecto_frutas.dibujo.MainActivity_Dibujo_nivel_1">
+    tools:context="com.android.proyecto_frutas.dibujo.MainActivity_Tabla">
 
     <!-- Vista anterior en forma de tabla -->
     <RelativeLayout

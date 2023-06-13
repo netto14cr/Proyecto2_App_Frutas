@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,38 +13,26 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.proyecto_frutas.MainActivity;
 import com.android.proyecto_frutas.R;
-import com.android.proyecto_frutas.tradicional.MainActivity_Nivel1;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.tensorflow.lite.Interpreter;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 
-public class MainActivity_Dibujo_nivel_1 extends AppCompatActivity {
+public class MainActivity_Tabla extends AppCompatActivity {
 
     private ImageView iv_dibujo;
     private EditText et_respuesta;
@@ -65,14 +51,14 @@ public class MainActivity_Dibujo_nivel_1 extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed(); // Volver atrás utilizando el botón de retroceso nativo
         // Lógica para regresar al MainActivity
-        Intent intent = new Intent(MainActivity_Dibujo_nivel_1.this, MainActivity.class);
+        Intent intent = new Intent(MainActivity_Tabla.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_dibujo_nivel1);
+        setContentView(R.layout.activity_main_tabla);
 
         Button btnRegresar = findViewById(R.id.btn_regresar);
         // MÚSICA DEL JUEGO
@@ -86,7 +72,7 @@ public class MainActivity_Dibujo_nivel_1 extends AppCompatActivity {
                 mp.stop();
                 mp.release();
                 // Lógica para regresar al MainActivity
-                Intent intent = new Intent(MainActivity_Dibujo_nivel_1.this, MainActivity.class);
+                Intent intent = new Intent(MainActivity_Tabla.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

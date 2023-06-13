@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.proyecto_frutas.adaptador.SliderAdapter;
+import com.android.proyecto_frutas.dibujo.MainActivity_Tabla;
 import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.android.proyecto_frutas.modelo.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 // Detiene el cambio automático de imágenes del ViewPager
                 stopSlideShow();
 
-                Intent intent = new Intent(MainActivity.this, MainActivity_Dibujo_nivel_1.class);
+                Intent intent = new Intent(MainActivity.this, MainActivity_Tabla.class);
                 startActivity(intent);
                 finish();
             }
