@@ -74,7 +74,12 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
 
         // Crea los objetos MediaPlayer
-        mp = MediaPlayer.create(this, R.raw.goats);
+        ////mp = MediaPlayer.create(this, R.raw.goats);
+        // MÚSICA DEL JUEGO
+        mp = MediaPlayer.create(this, R.raw.juego_normal);
+        mp.start();
+        mp.setLooping(true);
+
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
@@ -159,7 +164,7 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
     }
 
     private void compartirEnWhatsApp() {
-        String textoCompartir = "¡Mis resultados son increíbles!" + score;
+        String textoCompartir = "¡Mis resultados son increíbles! puntaje = " + score;
 
         // Verificar si WhatsApp está instalado en el dispositivo
         if (isWhatsAppInstalled()) {
@@ -216,8 +221,8 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
             intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
-            mp.stop();
-            mp.release();
+            //mp.stop();
+//            mp.release();
         }
     }
 

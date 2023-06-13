@@ -21,7 +21,10 @@
             android:name=".tiempo.MainActivity_Tiempo_Nivel1"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
-
+        <activity
+            android:name=".dibujo.MainActivity_Dibujo_nivel_1"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".tradicional.MainActivity_Nivel8"
             android:configChanges="orientation|screenSize"

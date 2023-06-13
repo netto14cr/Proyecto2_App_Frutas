@@ -11,9 +11,15 @@
         android:id="@+id/viewPager"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:contentDescription="@string/app_name"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="348dp"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
         android:id="@+id/layoutDots"
@@ -99,8 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/fondoet"
         android:contentDescription="@string/app_name"
         android:gravity="center"

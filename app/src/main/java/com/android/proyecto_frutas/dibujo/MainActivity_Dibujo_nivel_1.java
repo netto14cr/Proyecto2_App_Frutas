@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.android.proyecto_frutas.MainActivity;
 import com.android.proyecto_frutas.R;
+import com.android.proyecto_frutas.tradicional.MainActivity_Nivel1;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,24 +60,38 @@ public class MainActivity_Dibujo_nivel_1 extends AppCompatActivity {
     private int[] inputPixels = new int[28 * 28];
     private RecyclerView recyclerView;
     private TablaAdapter tablaAdapter;
-
-    
+    private MediaPlayer mp;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed(); // Volver atrás utilizando el botón de retroceso nativo
+        // Lógica para regresar al MainActivity
+        Intent intent = new Intent(MainActivity_Dibujo_nivel_1.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dibujo_nivel1);
 
-            setContentView(R.layout.activity_main_dibujo_nivel1);
         Button btnRegresar = findViewById(R.id.btn_regresar);
+        // MÚSICA DEL JUEGO
+        mp = MediaPlayer.create(this, R.raw.ver_resultados2);
+        mp.start();
+        mp.setLooping(true);
         btnRegresar.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                mp.stop();
+                mp.release();
                 // Lógica para regresar al MainActivity
                 Intent intent = new Intent(MainActivity_Dibujo_nivel_1.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
 
             recyclerView = findViewById(R.id.recyclerViewTabla);
             recyclerView.setLayoutManager(new GridLayoutManager(this, 1));

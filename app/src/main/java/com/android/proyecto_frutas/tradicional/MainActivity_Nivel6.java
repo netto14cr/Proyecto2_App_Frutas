@@ -86,7 +86,7 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
-        mp = MediaPlayer.create(this, R.raw.goats);
+        //mp = MediaPlayer.create(this, R.raw.goats);
         mp.start();
         mp.setLooping(true);
 
@@ -185,7 +185,7 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
     }
 
     private void compartirEnWhatsApp() {
-        String textoCompartir = "¡Mis resultados son increíbles!" + score;
+        String textoCompartir = "¡Mis resultados son increíbles! puntaje = " + score;
 
         // Verificar si WhatsApp está instalado en el dispositivo
         if (isWhatsAppInstalled()) {
@@ -261,8 +261,8 @@ public class MainActivity_Nivel6 extends AppCompatActivity {
 
             startActivity(intent);
             finish();
-            mp.stop();
-            mp.release();
+            //mp.stop();
+//            mp.release();
         }
     }
 

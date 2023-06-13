@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.proyecto_frutas.adapters.SliderAdapter;
+import com.android.proyecto_frutas.dibujo.MainActivity_Dibujo_nivel_1;
 import com.android.proyecto_frutas.models.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
 import com.android.proyecto_frutas.tradicional.MainActivity_Nivel1;
@@ -49,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         et_nombre = findViewById(R.id.txt_nombre);
         viewPager = findViewById(R.id.viewPager);
         layoutDots = findViewById(R.id.layoutDots);
@@ -91,7 +92,15 @@ public class MainActivity extends AppCompatActivity {
         resultTableButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGame(MainActivity_Tiempo_Nivel1.class);
+                mp.stop();
+                mp.release();
+
+                // Detiene el cambio automático de imágenes del ViewPager
+                stopSlideShow();
+
+                Intent intent = new Intent(MainActivity.this, MainActivity_Dibujo_nivel_1.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         // ...
 
         // MÚSICA DEL JUEGO
-        mp = MediaPlayer.create(this, R.raw.alphabet_song);
+        mp = MediaPlayer.create(this, R.raw.juego_normal);
         mp.start();
         mp.setLooping(true);
 
@@ -158,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
         String nombre = et_nombre.getText().toString();
 
         if (!nombre.isEmpty()) {
-            mp.stop();
-            mp.release();
+            //mp.stop();
+//            mp.release();
 
             // Detiene el cambio automático de imágenes del ViewPager
             stopSlideShow();

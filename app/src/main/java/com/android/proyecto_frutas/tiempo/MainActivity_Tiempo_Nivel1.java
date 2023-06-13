@@ -87,7 +87,7 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
 
         // Crea los objetos MediaPlayer
-        mp = MediaPlayer.create(this, R.raw.goats);
+        //mp = MediaPlayer.create(this, R.raw.goats);
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
@@ -169,8 +169,8 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
             intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
-            mp.stop();
-            mp.release();
+            //mp.stop();
+//            mp.release();
         }
     }
 
