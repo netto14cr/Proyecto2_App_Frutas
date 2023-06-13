@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.proyecto_frutas.adaptador.SliderAdapter;
-import com.android.proyecto_frutas.dibujo.MainActivity_Tabla;
+import com.android.proyecto_frutas.estadisticas.MainActivity_Tabla;
 import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.android.proyecto_frutas.modelo.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;

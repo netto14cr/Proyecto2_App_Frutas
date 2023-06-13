@@ -1,4 +1,4 @@
-package com.android.proyecto_frutas.dibujo;
+package com.android.proyecto_frutas.estadisticas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
