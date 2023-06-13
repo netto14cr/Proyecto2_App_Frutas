@@ -113,20 +113,17 @@
             android:onClick="Comparar"
             android:text="@string/boton_sumar"
             android:textColor="@android:color/background_light" />
+
     <Button
         android:id="@+id/btn_regresar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="488dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="67dp"
-        android:text="Regresar" />
-    </RelativeLayout>
+        android:layout_width="185dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/button2"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/fondoboton"
+        android:text="Regresar"
+        android:textColor="@android:color/background_light" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
