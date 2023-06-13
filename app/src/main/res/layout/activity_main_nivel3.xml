@@ -124,6 +124,7 @@
         android:background="@drawable/fondoboton"
         android:text="Regresar"
         android:textColor="@android:color/background_light" />
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
@@ -132,5 +133,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_completo" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
