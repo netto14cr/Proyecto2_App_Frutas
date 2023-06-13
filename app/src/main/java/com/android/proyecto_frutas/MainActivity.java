@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.android.proyecto_frutas.adaptador.SliderAdapter;
 import com.android.proyecto_frutas.estadisticas.MainActivity_Tabla;
+
 import com.android.proyecto_frutas.modelo.NavegacionMenu;
 import com.android.proyecto_frutas.modelo.Slide;
 import com.android.proyecto_frutas.tiempo.MainActivity_Tiempo_Nivel1;
@@ -186,8 +187,8 @@ public class MainActivity extends AppCompatActivity {
         String nombre = et_nombre.getText().toString();
 
         if (!nombre.isEmpty()) {
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
 
             // Detiene el cambio automático de imágenes del ViewPager
             stopSlideShow();

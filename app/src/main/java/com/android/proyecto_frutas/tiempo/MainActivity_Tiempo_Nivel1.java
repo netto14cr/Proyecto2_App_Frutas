@@ -196,8 +196,8 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
             intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
         }
     }
 

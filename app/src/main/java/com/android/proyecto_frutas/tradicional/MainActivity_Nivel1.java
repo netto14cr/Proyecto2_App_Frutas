@@ -218,7 +218,7 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
         }
     }
     public void NumAleatorio() {
-        if (score <= 1) {
+        if (score <= 10) {
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
             resultado = numAleatorio_uno + numAleatorio_dos;
@@ -245,8 +245,8 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
             intent.putExtra("vidas", string_vidas);
             startActivity(intent);
             finish();
-            //mp.stop();
-//            mp.release();
+            mp.stop();
+            mp.release();
         }
     }
 
