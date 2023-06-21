@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo03"
+    android:background="@drawable/fondo06"
     tools:context="com.android.proyecto_frutas.estadisticas.MainActivity_Tabla">
 
     <!-- Vista anterior en forma de tabla -->
@@ -24,7 +24,7 @@
         android:layout_above="@+id/btn_regresar"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:background="@drawable/fondo03"
+        android:background="@drawable/fondo06"
         android:padding="8dp"
         android:visibility="visible" />
 

@@ -28,8 +28,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import java.util.Locale;
-
 public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -40,13 +38,11 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
     private MediaPlayer mp, mp_great, mp_bad;
     private boolean isMenuOpen = false;
 
-
     int score, numAleatorio_uno, numAleatorio_dos, resultado, vidas = 3;
     String nombre_jugador, string_score, string_vidas;
 
-    String numero [] = {"cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve"};
+    String numero[] = {"cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"};
 
-    // Agrega la referencia a la base de datos de Firebase Realtime
     private DatabaseReference databaseRef;
 
     private CountDownTimer countDownTimer;
@@ -66,7 +62,6 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Lógica para regresar al MainActivity
                 Intent intent = new Intent(MainActivity_Tiempo_Nivel1.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -89,18 +84,16 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
-        // Obtén la referencia a la ubicación "puntaje" en la base de datos de Firebase
         databaseRef = FirebaseDatabase.getInstance().getReference("puntaje");
 
-        // Crea los objetos MediaPlayer
-        //mp = MediaPlayer.create(this, R.raw.goats);
+        mp = MediaPlayer.create(this, R.raw.goats);
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
         startTimer();
         NumAleatorio();
+        pauseTimer();
 
-        // En tu actividad principal
         NavegacionMenu navegacionMenu = new NavegacionMenu(this, nombre_jugador);
         navegacionMenu.setupNavigationDrawer();
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -129,7 +122,7 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
                 et_respuesta.setText("");
                 BaseDeDatos();
                 resetTimer();
-                startTimer();
+
             } else {
                 mp_bad.start();
                 vidas--;
@@ -287,10 +280,6 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
                 // El temporizador ha terminado, se ejecuta el código correspondiente
                 et_respuesta.setText("");
                 Toast.makeText(MainActivity_Tiempo_Nivel1.this, "Tardaste mucho tiempo en responder", Toast.LENGTH_SHORT).show();
-                // Reiniciar el cronómetro a 15 segundos
-                resetTimer();
-                startTimer();
-                NumAleatorio();
                 et_respuesta.setText("999");
                 Comparar(findViewById(R.id.button2));
             }
@@ -308,10 +297,11 @@ public class MainActivity_Tiempo_Nivel1 extends AppCompatActivity {
     }
 
     private void updateTimerText() {
-        int seconds = (int) (timeLeftInMillis / 1000);
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+        int seconds = (int) (timeLeftInMillis / 1000) + 1; // Agrega 1 segundo para compensar el retardo
+        String timeLeftFormatted = String.valueOf(seconds);
         tv_timer.setText(timeLeftFormatted);
     }
+
 
     @Override
     protected void onStop() {

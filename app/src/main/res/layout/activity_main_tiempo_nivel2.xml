@@ -135,6 +135,17 @@
             android:text="@string/boton_sumar"
             android:textColor="@android:color/background_light" />
 
+        <Button
+            android:id="@+id/btn_regresar"
+            android:layout_width="185dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/button2"
+            android:layout_alignStart="@+id/button2"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/fondoboton"
+            android:text="Regresar"
+            android:textColor="@android:color/background_light" />
+
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

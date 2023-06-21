@@ -9,11 +9,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,12 +43,13 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
     private MediaPlayer mp, mp_great, mp_bad;
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
-    private long timeLeftInMillis = 30000; // 30 segundos
+    private long timeLeftInMillis = 10000; // 10 segundos
     private static final long COUNTDOWN_INTERVAL = 1000; // Intervalo de actualización del temporizador
 
     private DatabaseReference databaseRef;
 
     private boolean isMenuOpen = false;
+
 
     int score, numAleatorio_uno, numAleatorio_dos, resultado, vidas = 3;
     String nombre_jugador, string_score, string_vidas;
@@ -57,8 +60,16 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_tiempo_nivel2);
-
         Toast.makeText(this, "Nivel 2 - Sumas y Restas", Toast.LENGTH_SHORT).show();
+        Button btnRegresar = findViewById(R.id.btn_regresar);
+        btnRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity_Tiempo_Nivel2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         tv_nombre = findViewById(R.id.textView_nombre);
         tv_score = findViewById(R.id.textView_score);
@@ -89,8 +100,8 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.app_logo);
 
-        
 
+        mp = MediaPlayer.create(this, R.raw.goats);
         mp_great = MediaPlayer.create(this, R.raw.wonderful);
         mp_bad = MediaPlayer.create(this, R.raw.bad);
 
@@ -273,6 +284,13 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         tv_timer.setText(timeLeftFormatted);
+
+        // Cambiar el color del texto según el tiempo restante
+        if (timeLeftInMillis < 5000) {
+            tv_timer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+        } else {
+            tv_timer.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
+        }
     }
 
 
@@ -280,7 +298,7 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
-        timeLeftInMillis = 15000;
+        timeLeftInMillis = 10000;
         updateCountdownText();
         startTimer();
     }
@@ -313,7 +331,7 @@ public class MainActivity_Tiempo_Nivel2 extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
